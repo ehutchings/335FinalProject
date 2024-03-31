@@ -19,3 +19,31 @@ gameinfo {
   margin: 10px;
   display: none;
 }
+
+.scorecss{
+  top: 15%;
+  right:15%;
+}
+.textgame{
+  /* Flex needed for textbox movement */
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+clickable {
+  position: absolute;
+  background-color: crimson;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
+
+clickables-container {
+  position: absolute;
+  display: none;
+  background-color: aquamarine;
+  width: 400px;
+  height: 400px;
+  left: 40%
+}
