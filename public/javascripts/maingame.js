@@ -53,7 +53,8 @@ function startGame() {
 
 
     //textboxGame(timerElement, gameinfoElement);
-   // mouseMoveGame(timerElement, gameinfoElement)
+//    // mouseMoveGame(timerElement, gameinfoElement)
+//    clickableGame(timerElement, gameinfoElement, timer, first, timerAppear);
 
     
 
@@ -150,27 +151,72 @@ function mouseMoveGame(timerElement, gameinfoElement, timer, first, timerAppear)
         const clickableHeight = 50;
         const maxWidth = 400 - clickableWidth;
         const maxHeight = 400 - clickableHeight;
-        for(let i = 0; i < 5; i++) {
-            let clickable = document.createElement("clickable");
-            newX = Math.floor(Math.random() * maxWidth);
-            newY = Math.floor(Math.random() * maxHeight);
-            clickable.style.top = newY.toString() + "px";
-            clickable.style.left = newX.toString() + "px";
-            clickable.style.cursor = "pointer";
-            clickable.addEventListener('click', () => {
-                clickable.style.display = "none";
-                clicked += 1;
-                console.log("Clicked!");
+        // for(let i = 0; i < 5; i++) {
+        //     let clickable = document.createElement("clickable");
+        //     newX = Math.floor(Math.random() * maxWidth);
+        //     newY = Math.floor(Math.random() * maxHeight);
+        //     clickable.style.top = newY.toString() + "px";
+        //     clickable.style.left = newX.toString() + "px";
+        //     clickable.style.cursor = "pointer";
+        //     clickable.addEventListener('click', () => {
+        //         clickable.style.display = "none";
+        //         clicked += 1;
+        //         console.log("Clicked!");
+                // if(clicked == maxClicked)
+                // {
+                //     console.log("Minigame passed!");
+                //     hide(clickablesContainer)
+                //     if(first == true)
+                //     {
+                //    updateScore();
+                //    first = false;
+                //     }
+                //     startGame();
+                // }
+            // }, {once: true});
+            // clickablesContainer.appendChild(clickable);
+            var myInt = setInterval(function () {
+                if(timerAppear === true) //starts the game's functionality
+                {
+                    for(let i = 0; i < 5; i++) {
+                        let clickable = document.createElement("clickable");
+                        newX = Math.floor(Math.random() * maxWidth);
+                        newY = Math.floor(Math.random() * maxHeight);
+                        clickable.style.top = newY.toString() + "px";
+                        clickable.style.left = newX.toString() + "px";
+                        clickable.style.cursor = "pointer";
+                        clickable.addEventListener('click', () => {
+                            clickable.style.display = "none";
+                            clicked += 1;
+                            console.log("Clicked!");
+                        }, {once: true});
+                        clickablesContainer.appendChild(clickable);}
+                    timerAppear = false;
+                }
+                timerElement.textContent = timer;
+                timer = timer - 1;
+                console.log("Tick");
+                //SKIPS 0 FOR SOME REASON SO -1 IS ACCURATE, DON'T CHANGE IT TO 0
+                if(timer === -1)
+                {
+                    timerElement.textContent = "FAIL";
+                    clearInterval(myInt); //stops timer
+                }
                 if(clicked == maxClicked)
                 {
-                    console.log("Minigame passed!");
-                    hide(clickablesContainer)
-                    updateScore();
+                    timerElement.textContent = "You did it!";
+                    clickablesContainer.innerHTML = "";
+                    clearInterval(myInt); //stops timer
+                    hide(clickablesContainer);
+                    if(first == true)
+                    {
+                   updateScore();
+                   first = false;
+                    }
                     startGame();
                 }
-            }, {once: true});
-            clickablesContainer.appendChild(clickable);
-            }
+            }, 1000);
+
         }
 
     //CLICK ELEMENTS GAME END
