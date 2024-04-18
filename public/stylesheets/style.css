@@ -21,10 +21,19 @@ gameinfo {
 }
 
 .scorecss{
-  top: 15%;
-  right:15%;
+  position: fixed;
+  top: 8%;
+  right:8%;
+  color:crimson
 }
 .textgame{
+  /* Flex needed for textbox movement */
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cpsgame{
   /* Flex needed for textbox movement */
   display:flex;
   align-items: center;
@@ -46,4 +55,9 @@ clickables-container {
   width: 400px;
   height: 400px;
   left: 40%
+}
+
+img {
+  position:absolute;
+  z-index: 1;
 }
