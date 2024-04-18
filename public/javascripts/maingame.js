@@ -48,19 +48,18 @@ function startGame() {
     document.getElementById("gameinfo").style.display = "inline";
     document.getElementById("startbutton").style.display = "none";
     var timerElement = document.getElementById("timer");
-    var gameinfoElement = document.getElementById("gameinfo");/*
+    var gameinfoElement = document.getElementById("gameinfo");
         let gameArrayIndex = Math.floor(Math.random() * gameArray.length); //randomizes games
         let chosenGame = gameArray[gameArrayIndex]; //chooses random game
         chosenGame.params = [timerElement, gameinfoElement, timer, first, timerAppear]; //sets the parameters
         chosenGame.func(...chosenGame.params); // starts the random game
-        */
+        
     
-        clickImageGame(timerElement, gameinfoElement, timer, first, timerAppear);
+       // clickImageGame(timerElement, gameinfoElement, timer, first, timerAppear);
 
     //textboxGame(timerElement, gameinfoElement);
 //    // mouseMoveGame(timerElement, gameinfoElement);
 //cpsGame(timerElement, gameinfoElement, timer, first, timerAppear);
-
     
 
 }
