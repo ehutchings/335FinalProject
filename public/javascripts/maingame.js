@@ -32,7 +32,9 @@ let gameArray = [
     { func: mouseMoveGame, params: [] },
     { func: clickableGame, params: []},
     { func: cpsGame, params: []},
-    { func: clickImageGame, params: []}
+    { func: wasdGame, params: []},
+    { func: clickImageGame, params: [] },
+    {func: colorGame, params: []}
 ];
 
 
@@ -53,20 +55,38 @@ function startGame() {
         let chosenGame = gameArray[gameArrayIndex]; //chooses random game
         chosenGame.params = [timerElement, gameinfoElement, timer, first, timerAppear]; //sets the parameters
         chosenGame.func(...chosenGame.params); // starts the random game
-        
     
-       // clickImageGame(timerElement, gameinfoElement, timer, first, timerAppear);
+
 
     //textboxGame(timerElement, gameinfoElement);
-//    // mouseMoveGame(timerElement, gameinfoElement);
+//    // mouseMoveGame(timerElement, gameinfoElement)
 //cpsGame(timerElement, gameinfoElement, timer, first, timerAppear);
+
     
 
 }
 
 function textboxGame(timerElement, gameinfoElement, timer, first, timerAppear){
     var textInputElement = document.getElementById("textInput");
-    gameinfoElement.textContent = "Match this text Exactly: test";
+    const usedWord = [
+        "transition", "season", "admission", "monarch", "resource", "straight", "stable", 
+        "stadium", "prospect", "economics", "reality", "transaction", "compartment", "publicity", "insert", 
+        "suspicion", "lonely", "missile", "threaten", "barrier", "departure", "conference", 
+        "voyage", "audience", "wriggle", "modernize", "facility", "handicap", "computer", 
+        "keyboard", "monitor", "software", "hardware", "network", "internet", "database", 
+        "algorithm", "function", "variable", "constant", "parameter", "argument", "operator", 
+        "expression", "statement", "semicolon", "surprise", "cabinet", "mountain", "captain", 
+        "history", "business", "medicine", "daughter", "absorption", "language", "sentence", 
+        "competence", "laughter", "umbrella", "elephant", "triangle", "backpack", "reservoir", 
+        "diamond", "keyboard", "notebook", "excavate", "rainbow", "umbrella", "vampire", 
+        "whisper", "zeppelin", "absolute", "birthday", "calendar", "champagne", "elephant", 
+        "favorite", "grammar", "harmony", "insight", "justice", "kitchen", "fascinate", 
+        "meditate", "narrate", "occasion", "passion", "question", "radiator", "solution", 
+        "wisecrack", "salesperson", "looting", "spectrum", "concert"
+    ];
+    let wordIndex = Math.floor(Math.random() * usedWord.length); //randomizes games
+let chosenWord = usedWord[wordIndex]; //chooses random game
+    gameinfoElement.textContent = "Match this word exactly: " + chosenWord;
     textboxclear(textInputElement) //clears textbox
 
     //myInt is where the timer starts and everything in that function will load when the timer loads a second in.
@@ -89,7 +109,7 @@ function textboxGame(timerElement, gameinfoElement, timer, first, timerAppear){
            // TEXT MATCHING GAME:
            document.getElementById("textInput").addEventListener("input", function(event) {
             const inputText = event.target.value; // Get the value of the input
-            if (inputText === "test" && timerElement.textContent != "FAIL") {
+            if (inputText === chosenWord && timerElement.textContent != "FAIL") {
                 timerElement.textContent = "You did it!";
                 clearInterval(myInt); //stops timer
                 if(first == true)
@@ -181,6 +201,7 @@ function mouseMoveGame(timerElement, gameinfoElement, timer, first, timerAppear)
                 {
                     timerElement.textContent = "FAIL";
                     clearInterval(myInt); //stops timer
+                    hide(clickablesContainer);
                 }
                 if(clicked == maxClicked)
                 {
@@ -200,89 +221,6 @@ function mouseMoveGame(timerElement, gameinfoElement, timer, first, timerAppear)
         }
 
     //CLICK ELEMENTS GAME END
-
-
-
-
-    //CLICK IMAGE GAME
-    function clickImageGame(timerElement, gameinfoElement, timer, first, timerAppear) {
-        sources = ["../images/dog.png", "../images/cat.png"];
-        targetIndex = Math.floor(Math.random() * sources.length);
-        targetImage = sources[targetIndex];
-        console.log(targetImage);
-        sources.splice(targetIndex, 1);
-        console.log(sources);
-        imageType = targetImage.split("/");
-        imageType = imageType[2].split(".");
-        imageType = imageType[0];
-        gameinfoElement.textContent = "Click the image of a " + imageType;
-        targetClicked = false;
-        wrongClick = false;
-        let clickablesContainer = document.getElementById("clickables-container");
-        clickablesContainer.style.display = "block";
-        const imageWidth = 75;
-        const imageHeight = 75;
-        const maxWidth = 400 - imageWidth;
-        const maxHeight = 400 - imageHeight;
-            var myInt = setInterval(function () {
-                if(timerAppear === true) //starts the game's functionality
-                {       //ADD TARGET IMAGE
-                    let targetImg = document.createElement("img");
-                    targetImg.src = targetImage;
-                    newX = Math.floor(Math.random() * maxWidth);
-                    newY = Math.floor(Math.random() * maxHeight);
-                    targetImg.style.top = newY.toString() + "px";
-                    targetImg.style.left = newX.toString() + "px";
-                    targetImg.style.cursor = "pointer";
-                    targetImg.addEventListener('click', () => {
-                        targetClicked = true;
-                        targetImg.style.display = "none";
-                    }, {once: true});
-                    clickablesContainer.appendChild(targetImg);
-                    for(let i = 0; i < 5; i++) {                   //ADD NON-TARGET IMAGES
-                        let img = document.createElement("img");
-                        imgIndex = Math.floor(Math.random() * sources.length);
-                        imgSource = sources[imgIndex];
-                        img.src = imgSource;
-                        newX = Math.floor(Math.random() * maxWidth);
-                        newY = Math.floor(Math.random() * maxHeight);
-                        img.style.top = newY.toString() + "px";
-                        img.style.left = newX.toString() + "px";
-                        img.style.cursor = "pointer";
-                        img.addEventListener('click', () => {
-                            wrongClick = true;
-                            img.style.display = "none";
-                        }, {once: true});
-                        clickablesContainer.appendChild(img);}
-                    timerAppear = false;
-                }
-                timerElement.textContent = timer;
-                timer = timer - 1;
-                console.log("Tick");
-                //SKIPS 0 FOR SOME REASON SO -1 IS ACCURATE, DON'T CHANGE IT TO 0
-                if(timer === -1 || wrongClick == true)
-                {
-                    timerElement.textContent = "FAIL";
-                    clearInterval(myInt); //stops timer
-                }
-                if(targetClicked == true)
-                {
-                    timerElement.textContent = "You did it!";
-                    clickablesContainer.innerHTML = "";
-                    clearInterval(myInt); //stops timer
-                    hide(clickablesContainer);
-                    if(first == true)
-                    {
-                   updateScore();
-                   first = false;
-                    }
-                    startGame();
-                }
-            }, 1000);
-
-        }
-
-    //CLICK IMAGE GAME END
 
 function cpsGame(timerElement, gameinfoElement, timer, first, timerAppear){
     var clickDisplayElement = document.getElementById("clickDisplay");
@@ -334,21 +272,316 @@ function cpsGame(timerElement, gameinfoElement, timer, first, timerAppear){
                 timerElement.textContent = "FAIL";
                 clearInterval(myInt); //stops timer
             }
-                // if (timerElement.textContent != "FAIL" && cpsNumber >= 5) {
-                //     timerElement.textContent = "You did it!";
-                //     clearInterval(myInt); //stops timer
-                //     document.removeEventListener('click', cpsListener, false); // Remove listener when game ends
-                //     if(first == true)
-                //     {
-                //    updateScore();
-                //    first = false;
-                //    startGame();
-                //     }
-                    // make it jump to the random minigame function when it is developed
-               // }
         }, 1000);
     }
+
+function wasdGame(timerElement, gameinfoElement, timer, first, timerAppear){
+    const box = document.querySelector('#box');
+    const sprite = document.querySelector('#sprite');
+    let speed = 10;
+    let trailColor = 'red'; // Color of the trail
+    let trailSize = 15; // Size of the trail dot
+    var wwidth = window.innerWidth;
+    var hheight = window.innerHeight; 
+    var combo = 0;
+    let comboArray = [[0, 0]];
+    let trailDots = []; // Array to store trail dots
+    display(box);
+    display(sprite);
+    const toNum = (pxVal) => {
+        return parseInt(pxVal, 10);
+    };
+    const addTrailDot = (left, bottom) => {
+        const trailDot = document.createElement('div');
+        trailDot.className = 'trail-dot';
+        trailDot.style.backgroundColor = trailColor;
+        trailDot.style.width = trailSize + 'px';
+        trailDot.style.height = trailSize + 'px';
+        trailDot.style.position = 'absolute';
+        trailDot.style.left = (wwidth/9 + toNum(sprite.style.left)) + 'px'; // Use current sprite position
+        trailDot.style.bottom = (hheight/1.5 + toNum(sprite.style.bottom)) + 'px'; // Use current sprite position
+        document.body.appendChild(trailDot);
+        trailDots.push(trailDot); // Add the trail dot to the array
     
+    };
+    const resetTrail = () => {
+        for (const dot of trailDots) {
+            document.body.removeChild(dot);
+        }
+        trailDots = []; // Reset the array
+    };
+    gameinfoElement.textContent = "Paint 25 Spaces Using WASD";
+    var myInt = setInterval(function () {
+        if(timerAppear === true) //starts the game's functionality
+        {
+            window.addEventListener('keydown', handleMovement);
+            timerAppear = false;
+        }
+        timerElement.textContent = timer;
+        timer = timer - 1;
+        //SKIPS 0 FOR SOME REASON SO -1 IS ACCURATE, DON'T CHANGE IT TO 0
+        if(timer === -1)
+        {
+            timerElement.textContent = "FAIL";
+            clearInterval(myInt); //stops timer
+            window.removeEventListener('keydown', handleMovement);
+            hide(box);
+            hide(sprite);
+            resetTrail(); // Remove all trail dots from the screen
+        }
+
+        }, 1000);
+            const handleMovement = (e) => {
+                // Handle movement only if the square is not fully painted
+                let left = toNum(sprite.style.left);
+                const bottom = toNum(sprite.style.bottom);
+                addTrailDot(left, bottom);
+                switch (e.key) {
+                    case 'a':
+                        if (left <= 0) return (sprite.style.left = 0);
+                        sprite.style.left = left - speed + 'px';
+                        addTrailDot(left, bottom);
+                        console.log("Left, Bottom: " + left + " " +  bottom);
+                        checkAndAppend(comboArray, left, bottom);
+                        break;
+                    case 'd':
+                        if (left >= 50) return (sprite.style.left = 50);
+                        sprite.style.left = left + speed + 'px';
+                        addTrailDot(left, bottom);
+                        console.log("Left, Bottom: " + left + " " +  bottom);
+                        checkAndAppend(comboArray, left, bottom);
+                        break;
+                    case 'w':
+                        if (bottom >= 0) return (sprite.style.bottom = 0);
+                        sprite.style.bottom = bottom + speed + 'px';
+                        addTrailDot(left, bottom);
+                        console.log("Left, Bottom: " + left + " " +  bottom);
+                        checkAndAppend(comboArray, left, bottom);
+                        break;
+                    case 's':
+                        if (bottom <= -50) return (sprite.style.bottom = -50);
+                        sprite.style.bottom = bottom - speed + 'px';
+                        addTrailDot(left, bottom);
+                        console.log("Left, Bottom: " + left + " " +  bottom);
+                        checkAndAppend(comboArray, left, bottom);
+                        break;
+                }
+    };
+
+
+
+    function checkAndAppend(array, num1, num2) {
+        // Check if the combination already exists in the array
+        let exists = array.some(pair => pair[0] === num1 && pair[1] === num2);
+        
+        // If the combination doesn't exist, append it to the array
+        if (!exists) {
+            array.push([num1, num2]);
+            combo = combo + 1;
+            if(combo === 23)
+            {
+                timerElement.textContent = "You did it!";
+                clearInterval(myInt); //stops timer
+                if(first == true)
+                {
+               updateScore();
+               first = false;
+               window.removeEventListener('keydown', handleMovement);
+               hide(box);
+               hide(sprite);
+            //    document.body.removeChild(trailDot);
+            resetTrail(); // Remove all trail dots from the screen
+            sprite.style.left = 0;
+            sprite.style.bottom = 0;
+               startGame();
+                }
+            }
+
+        }
+        
+        return array;
+    }
+
+}
+function clickImageGame(timerElement, gameinfoElement, timer, first, timerAppear) {
+    sources = ["../images/dog.png", "../images/cat.png"];
+    targetIndex = Math.floor(Math.random() * sources.length);
+    targetImage = sources[targetIndex];
+    console.log(targetImage);
+    sources.splice(targetIndex, 1);
+    console.log(sources);
+    imageType = targetImage.split("/");
+    imageType = imageType[2].split(".");
+    imageType = imageType[0];
+    gameinfoElement.textContent = "Click the image of a " + imageType;
+    targetClicked = false;
+    wrongClick = false;
+    let clickablesContainer = document.getElementById("clickables-container");
+    clickablesContainer.style.display = "block";
+    const imageWidth = 75;
+    const imageHeight = 75;
+    const maxWidth = 400 - imageWidth;
+    const maxHeight = 400 - imageHeight;
+        var myInt = setInterval(function () {
+            if(timerAppear === true) //starts the game's functionality
+            {       //ADD TARGET IMAGE
+                let targetImg = document.createElement("img");
+                targetImg.src = targetImage;
+                newX = Math.floor(Math.random() * maxWidth);
+                newY = Math.floor(Math.random() * maxHeight);
+                targetImg.style.top = newY.toString() + "px";
+                targetImg.style.left = newX.toString() + "px";
+                targetImg.style.cursor = "pointer";
+                targetImg.addEventListener('click', () => {
+                    targetClicked = true;
+                    targetImg.style.display = "none";
+                }, {once: true});
+                clickablesContainer.appendChild(targetImg);
+                for(let i = 0; i < 5; i++) {                   //ADD NON-TARGET IMAGES
+                    let img = document.createElement("img");
+                    imgIndex = Math.floor(Math.random() * sources.length);
+                    imgSource = sources[imgIndex];
+                    img.src = imgSource;
+                    newX = Math.floor(Math.random() * maxWidth);
+                    newY = Math.floor(Math.random() * maxHeight);
+                    img.style.top = newY.toString() + "px";
+                    img.style.left = newX.toString() + "px";
+                    img.style.cursor = "pointer";
+                    img.addEventListener('click', () => {
+                        wrongClick = true;
+                        img.style.display = "none";
+                    }, {once: true});
+                    clickablesContainer.appendChild(img);}
+                timerAppear = false;
+            }
+            timerElement.textContent = timer;
+            timer = timer - 1;
+            console.log("Tick");
+            //SKIPS 0 FOR SOME REASON SO -1 IS ACCURATE, DON'T CHANGE IT TO 0
+            if(timer === -1 || wrongClick == true)
+            {
+                timerElement.textContent = "FAIL";
+                clearInterval(myInt); //stops timer
+            }
+            if(targetClicked == true)
+            {
+                timerElement.textContent = "You did it!";
+                clickablesContainer.innerHTML = "";
+                clearInterval(myInt); //stops timer
+                hide(clickablesContainer);
+                if(first == true)
+                {
+               updateScore();
+               first = false;
+                }
+                startGame();
+            }
+        }, 1000);
+
+    }
+
+
+
+ //Color ELEMENTS GAME
+ function colorGame(timerElement, gameinfoElement, timer, first, timerAppear) {
+    const usedColor = ["red", "blue", "green", "pink", "purple", "orange"];
+            let colorIndex = Math.floor(Math.random() * usedColor.length); //randomizes games
+        let chosenColor = usedColor[colorIndex]; //chooses random game
+     colorIndex = Math.floor(Math.random() * usedColor.length); //randomizes games
+        let chosenColor2 = usedColor[colorIndex]; //chooses random game
+        gameinfoElement.style.color = chosenColor2;
+    gameinfoElement.textContent = "Click the " + chosenColor +  " box!";
+    colorOfBox = "";
+    matchColor = "";
+    if(chosenColor == "red")
+    {
+        matchColor = "rgb(255, 0, 0)";
+    }
+    if(chosenColor == "blue")
+    {
+     matchColor = "rgb(0, 0, 255)";   
+    }
+    if(chosenColor == "green")
+    {
+    matchColor = "rgb(0, 128, 0)";
+    }
+    if(chosenColor == "pink")
+    {
+        matchColor = "rgb(255, 192, 203)";
+    }
+    if(chosenColor == "purple")
+    {
+        matchColor = "rgb(128, 0, 128)";
+    }
+    if(chosenColor == "orange")
+    {
+        matchColor = "rgb(255, 165, 0)";
+    }
+
+    clicked = 0;
+    maxClicked = 6;
+    let clickablesContainer = document.getElementById("clickables-container");
+    clickablesContainer.style.display = "block";
+    const clickableWidth = 50;
+    const clickableHeight = 50;
+    const maxWidth = 400 - clickableWidth;
+    const maxHeight = 400 - clickableHeight;
+        var myInt = setInterval(function () {
+            if(timerAppear === true) //starts the game's functionality
+            {
+                for(let i = 0; i < 6; i++) {
+                    color = "color";
+                    // colorN = "5"
+                    let clickable = document.createElement(color + i);
+                    newX = Math.floor(Math.random() * maxWidth);
+                    newY = Math.floor(Math.random() * maxHeight);
+                    clickable.style.top = newY.toString() + "px";
+                    clickable.style.left = newX.toString() + "px";
+                    clickable.style.cursor = "pointer";
+                    clickable.addEventListener('click', () => {
+                        clickable.style.display = "none";
+                        let computedStyle = window.getComputedStyle(clickable);
+                        let colorOfBox = computedStyle.getPropertyValue("background-color");
+                        console.log(colorOfBox);
+                        console.log(matchColor);
+                        if(matchColor == colorOfBox)
+                        {
+                            timerElement.textContent = "You did it!";
+                            clickablesContainer.innerHTML = "";
+                            clearInterval(myInt); //stops timer
+                            hide(clickablesContainer);
+                            if(first == true)
+                            {
+                           updateScore();
+                           gameinfoElement.style.color = "black";
+                           first = false;
+                            }
+                            startGame();
+                        }
+                        else if(matchColor != colorOfBox)
+                        {
+                            timerElement.textContent = "FAIL";
+                            clearInterval(myInt); //stops timer
+                            hide(clickablesContainer);
+                        }
+                        clicked += 1;
+                        console.log("Clicked!");
+                    }, {once: true});
+                    clickablesContainer.appendChild(clickable);}
+                timerAppear = false;
+            }
+            timerElement.textContent = timer;
+            timer = timer - 1;
+            console.log("Tick");
+            //SKIPS 0 FOR SOME REASON SO -1 IS ACCURATE, DON'T CHANGE IT TO 0
+            if(timer === -1)
+            {
+                timerElement.textContent = "FAIL";
+                clearInterval(myInt); //stops timer
+            }
+        }, 1000);
+
+    }
 
 
 function display(element) { //displays textbox

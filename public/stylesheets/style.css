@@ -60,3 +60,58 @@ img {
   position:absolute;
   z-index: 1;
 }
+
+#sprite {
+  width: 25px;
+  height: 25px;
+  background: red;
+  position: relative;
+  transition: 0.1s linear;
+}
+color1 {
+  position: absolute;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
+
+color2 {
+  position: absolute;
+  background-color: blue;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
+
+color3 {
+  position: absolute;
+  background-color: green;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
+
+color4 {
+  position: absolute;
+  background-color: pink;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
+
+color5 {
+  position: absolute;
+  background-color:purple;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
+
+color0 {
+  position: absolute;
+  background-color: orange;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
