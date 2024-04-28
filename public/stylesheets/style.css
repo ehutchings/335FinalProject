@@ -20,6 +20,10 @@ gameinfo {
   display: none;
 }
 
+#failbutton
+{
+  display: none;
+}
 .scorecss{
   position: fixed;
   top: 8%;

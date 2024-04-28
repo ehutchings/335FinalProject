@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+var bcrypt = require('bcryptjs');
 
 app.use(logger('dev'));
 app.use(express.json());

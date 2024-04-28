@@ -1,0 +1,30 @@
+body{
+    text-align: center;
+}
+
+.scoreboard {
+    display: block;
+    margin: 5%;
+}
+
+tableScore {
+    text-align: center;
+    font-size: 20px;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    border-style: solid;
+    border-color: black;
+    background-color: yellow;
+}
+
+tableName {
+    text-align: center;
+    font-size: 20px;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    border-style: solid;
+    border-color:black;
+    background-color: yellow;
+}

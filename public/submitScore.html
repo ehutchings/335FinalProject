@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/stylesheets/scoreboardstyle.css">
+  <script src = "/javascripts/loadScoreboard.js"></script>
+</head>
+
+<body>
+<p>GAME OVER!</p>
+<h1>Your final score: <score id = "userscore"></score></h1>
+<form method = "post" action="/submitScore">
+<div>Please enter a name. Max 5 characters</div>
+<input type = "text" name = "name" placeholder="Player Name">
+<input type = "hidden" name = "inputscore" id = "inputscore" value = "">
+</form>
+<div id = "message"></div>
+
+<scoreboard id = "scoreboard" class = "scoreboard">
+<tableName>NAME</tableName><tableScore>SCORE</tableScore>
+<br>
+</scoreboard>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const score = urlParams.get("score");
+  if (score) {
+    document.getElementById('userscore').innerHTML = score;
+    document.getElementById('inputscore').value = score;
+  } 
+  const message = urlParams.get("message");
+  if(message) {
+    document.getElementById("message").innerHTML = message
+  }
+</script>
+
+</body>
+</html>

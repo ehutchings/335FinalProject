@@ -15,7 +15,6 @@
 // have minigame fail go to game over screen
 //have them speed up
 //front end design
-
 let intervalId; //for timer resets
 
 var score = 0;
@@ -105,6 +104,7 @@ let chosenWord = usedWord[wordIndex]; //chooses random game
             timerElement.textContent = "FAIL";
             clearInterval(myInt); //stops timer
             hide(textInputElement) //hides textbox
+            displayFailButton()
         }
            // TEXT MATCHING GAME:
            document.getElementById("textInput").addEventListener("input", function(event) {
@@ -132,7 +132,8 @@ function mouseMoveGame(timerElement, gameinfoElement, timer, first, timerAppear)
         document.removeEventListener('mousemove', myListener, false);
         if (mouseStart === true){ 
             timerElement.textContent = "FAIL";
-            clearInterval(myInt); 
+            clearInterval(myInt);
+            displayFailButton()
 
         }
     };
@@ -202,6 +203,7 @@ function mouseMoveGame(timerElement, gameinfoElement, timer, first, timerAppear)
                     timerElement.textContent = "FAIL";
                     clearInterval(myInt); //stops timer
                     hide(clickablesContainer);
+                    displayFailButton()
                 }
                 if(clicked == maxClicked)
                 {
@@ -271,6 +273,7 @@ function cpsGame(timerElement, gameinfoElement, timer, first, timerAppear){
             {
                 timerElement.textContent = "FAIL";
                 clearInterval(myInt); //stops timer
+                displayFailButton()
             }
         }, 1000);
     }
@@ -328,6 +331,7 @@ function wasdGame(timerElement, gameinfoElement, timer, first, timerAppear){
             hide(box);
             hide(sprite);
             resetTrail(); // Remove all trail dots from the screen
+            displayFailButton()
         }
 
         }, 1000);
@@ -462,6 +466,7 @@ function clickImageGame(timerElement, gameinfoElement, timer, first, timerAppear
             {
                 timerElement.textContent = "FAIL";
                 clearInterval(myInt); //stops timer
+                displayFailButton()
             }
             if(targetClicked == true)
             {
@@ -563,6 +568,7 @@ function clickImageGame(timerElement, gameinfoElement, timer, first, timerAppear
                             timerElement.textContent = "FAIL";
                             clearInterval(myInt); //stops timer
                             hide(clickablesContainer);
+                            displayFailButton()
                         }
                         clicked += 1;
                         console.log("Clicked!");
@@ -578,6 +584,7 @@ function clickImageGame(timerElement, gameinfoElement, timer, first, timerAppear
             {
                 timerElement.textContent = "FAIL";
                 clearInterval(myInt); //stops timer
+                displayFailButton()
             }
         }, 1000);
 
@@ -601,6 +608,11 @@ function updateScore( ){
     document.getElementById("score").innerHTML = "Score: " + score;
   }
 
+function displayFailButton() {
+    document.getElementById("failbutton").style.display = "block";
+    link = document.getElementById("failbutton").children;
+    link[0].href = "/submitScore?score=" + String(score);
+}
 
 document.addEventListener('mousemove', myListener, false); //for mouse movement
 
