@@ -31,7 +31,7 @@ router.post('/submitScore',function(req, res, next) {
   }
   else if (gamemode == '1life')
   {
-    client.query('SELECT * FROM score WHERE name = $1 AND score = $2', [req.body.name, req.body.inputscore], function(err, result) {
+    client.query('SELECT * FROM score WHERE name = $1 AND score = $2', [playerName, score], function(err, result) {
       if (err) {
         console.log("unable to query SELECT");
         next(err);
@@ -40,7 +40,7 @@ router.post('/submitScore',function(req, res, next) {
           res.redirect('/submitScore?message=Name+and+score+combination+already+exist.&score=' + String(score) + '&gamemode=' + gamemode);
       }
       else {
-        client.query('INSERT INTO score (name, score) VALUES($1, $2)', [req.body.name, req.body.inputscore], function(err, result) {
+        client.query('INSERT INTO score (name, score) VALUES($1, $2)', [playerName, score], function(err, result) {
         if (err) {
           console.log("unable to query INSERT");
           next(err);
@@ -53,7 +53,7 @@ router.post('/submitScore',function(req, res, next) {
     }
     else if (gamemode == '3lives')
     {
-      client.query('SELECT * FROM score3lives WHERE name = $1 AND score = $2', [req.body.name, req.body.inputscore], function(err, result) {
+      client.query('SELECT * FROM score3lives WHERE name = $1 AND score = $2', [playerName, score], function(err, result) {
         if (err) {
           console.log("unable to query SELECT");
           next(err);
@@ -62,7 +62,7 @@ router.post('/submitScore',function(req, res, next) {
             res.redirect('/submitScore?message=Name+and+score+combination+already+exist.&score=' + String(score) + '&gamemode=' + gamemode);
         }
         else {
-          client.query('INSERT INTO score3lives (name, score) VALUES($1, $2)', [req.body.name, req.body.inputscore], function(err, result) {
+          client.query('INSERT INTO score3lives (name, score) VALUES($1, $2)', [playerName, score], function(err, result) {
           if (err) {
             console.log("unable to query INSERT");
             next(err);
