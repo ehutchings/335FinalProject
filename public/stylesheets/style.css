@@ -20,12 +20,24 @@ gameinfo {
   display: none;
 }
 
+#failbutton
+{
+  display: none;
+}
+
 .scorecss{
   position: fixed;
   top: 8%;
   right:8%;
   color:crimson
 }
+.livecss{
+  position: fixed;
+  top: 14%;
+  right:8%;
+  color:crimson
+}
+
 .textgame{
   /* Flex needed for textbox movement */
   display:flex;
@@ -114,4 +126,23 @@ color0 {
   width: 50px;
   height: 50px;
   z-index: 1;
+}
+.image-hover {
+  -webkit-transition: all 0.50s;
+  transition: all 0.50s;
+  &:hover {
+      border: 1px solid gray;
+      filter: brightness(130%);
+      -webkit-filter: brightness(130%);
+      -moz-filter: brightness(130%);
+      -o-filter: brightness(130%);
+      -ms-filter: brightness(130%);
+      -webkit-transition: all 0.50s;
+      transition: all 0.50s;
+  }
+}
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

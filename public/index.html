@@ -6,9 +6,13 @@
 </head>
 
 <body>
-  <button type = "button" id = "startbutton">START GAME</button><br>
   <timer id = "timer">Get Ready...</timer><br>
   <gameinfo id = "gameinfo">Short desc here</gameinfo><br>
+  <div class="button-container">
+  <button type = "button" id = "startbutton">1 LIFE MODE</button><br>
+  <button type = "button" id = "start3button">3 LIVES MODE</button><br>
+  <button type = "button" id = "homebutton" style="display: none;">HOME</button>
+  </div>
   <scorecontainer id = "scorecontainer"></scorecontainer>
   <clickables-container id = "clickables-container"></clickables-container>
   
@@ -24,6 +28,27 @@
 
 
 <h1><score id = "score" class="scorecss"></score></h1>
+<h1><score id = "lives" class="livecss"></score></h1>
+<button type = "submit" id = "failbutton"><a href = "">CLICK HERE TO SUBMIT SCORE</a></button><br>
 
 </body>
+<script>
+  document.getElementById("startbutton").addEventListener("click", function() {
+    startGame(1); // Start game with 0 lives
+    score = 0;
+    gamemode = "1life";
+    console.log("1 Life Game Started.");
+});
+
+document.getElementById("start3button").addEventListener("click", function() {
+    startGame(3); // Start game with 3 lives
+    score = 0;
+    gamemode = '3lives';
+    console.log("3 Lives Game Started.");
+});
+
+document.getElementById("homebutton").addEventListener("click", function() {
+  window.location.href = "/"; // Redirect to the index.html page
+});
+</script>
 </html>

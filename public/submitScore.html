@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/stylesheets/scoreboardstyle.css">
+</head>
+
+<body>
+<p>GAME OVER!</p>
+<h1>Your final score: <score id = "userscore"></score></h1>
+<form method = "post" action="/submitScore">
+<div>Please enter a name. Max 5 characters</div>
+<input type = "text" name = "name" placeholder="Player Name">
+<input type = "hidden" name = "inputscore" id = "inputscore" value = "">
+<input type = "hidden" name = "gamemode" id = "gamemode" value = "">
+<button type = "submit">Submit</button>
+</form>
+<div id = "message"></div>
+
+<scoreboard id = "scoreboard" class = "scoreboard">
+<tableName>NAME</tableName><tableScore>SCORE</tableScore>
+<br>
+</scoreboard>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const score = urlParams.get("score");
+  if (score) {
+    document.getElementById('userscore').innerHTML = score;
+    document.getElementById('inputscore').value = score;
+  } 
+  const message = urlParams.get("message");
+  if(message) {
+    document.getElementById("message").innerHTML = message;
+  }
+  const gamemode = urlParams.get("gamemode");
+  if(gamemode) {
+    document.getElementById("gamemode").value = gamemode;
+  }
+
+  function insertScore(dataTable, data)
+{
+    for(scores of data)
+    {
+        tableScore = document.createElement("tableScore");
+        tableScore.textContent = scores.score;
+        tableName = document.createElement("tableName");
+        tableName.textContent = scores.name;
+        dataTable.appendChild(tableName);
+        dataTable.appendChild(tableScore);
+        dataTable.innerHTML += "<br>";
+    }
+}
+
+function buildScoreBoard()
+{
+    currentGamemode = document.getElementById("gamemode").value;
+    fetch(`/loadScoreboard/${currentGamemode}`)
+        .then(response =>{
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+          if(data == "None")
+          {
+            document.getElementById('message').innerText = "Score table could not be loaded. Please try playing again.";
+            throw new Error('No scores were found.');
+          }
+            console.log(data);
+            const dataTable = document.getElementById("scoreboard");
+            insertScore(dataTable, data);
+        })
+        .catch(error => {
+            console.error("There was a problem with the fetch operation:", error);
+        });
+}
+
+buildScoreBoard();
+</script>
+
+</body>
+</html>
