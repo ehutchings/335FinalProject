@@ -3,9 +3,53 @@
 <head>
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src = "javascripts/maingame.js"></script>
+<style>
+  @media screen and (min-width: 900px) and (min-height: 600px)
+  {
+    resize-warning {
+      display: none;
+    }
+    game-elements {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 901px)
+  {
+    resize-warning {
+      display: absolute;
+      font-size: 7vw;
+      z-index: 1;
+      color: red;
+      width: 100vw;
+      height: 100vh;
+    }
+    game-elements {
+      display: none;
+    }
+  }
+
+  @media screen and (max-height: 700px)
+  {
+    resize-warning {
+      display: absolute;
+      font-size: 7vw;
+      z-index: 1;
+      color: red;
+      width: 100vw;
+      height: 100vh;
+    }
+    game-elements {
+      display: none;
+    }
+  }
+
+</style>
 </head>
 
 <body>
+  <resize-warning>PLEASE RESIZE WINDOW!</resize-warning>
+  <game-elements>
   <timer id = "timer">Get Ready...</timer><br>
   <gameinfo id = "gameinfo">Short desc here</gameinfo><br>
   <div class="button-container">
@@ -36,6 +80,9 @@
   <p>Once your game is over, you may submit your score to the leaderboard.</p>
   <p>Only the highest scores will show up, so do your best!</p>
 </info>
+</game-elements>
+
+
 
 
 </body>

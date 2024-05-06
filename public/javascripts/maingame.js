@@ -639,7 +639,7 @@ wrongCount = 15
     }
 
 
-    sources = ["../images/dog.png", "../images/cat.png"];
+    sources = ["../images/dog.png", "../images/cat.png", "../images/chicken.png", "../images/cow.png", "../images/pig.png"];
     targetIndex = Math.floor(Math.random() * sources.length);
     targetImage = sources[targetIndex];
     console.log(targetImage);
