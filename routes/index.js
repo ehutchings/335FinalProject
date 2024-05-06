@@ -117,7 +117,7 @@ router.post('/submitScore',function(req, res, next) {
   }
   else
   {
-    if (!isNaN(parseFloat(score)) == "True" || score.length > 3 || score == '')
+    if (!isNaN(parseFloat(score)) == "True" || score.length > 3 || score == '' || score == "0")
     {
       console.log("Invalid score.")
       res.redirect("/submitScore?message=Invalid+score.+Please+play+again+to+get+a+new+score.&gamemode=" + gamemode)

@@ -2,17 +2,18 @@
 <html>
 <head>
   <link rel="stylesheet" href="/stylesheets/scoreboardstyle.css">
+  <link rel = "stylesheet" href ="/stylesheets/style.css">
 </head>
 
 <body>
-<p>GAME OVER!</p>
+<p class = 'gameover'>GAME OVER!</p>
 <h1>Your final score: <score id = "userscore"></score></h1>
 <form method = "post" action="/submitScore">
 <div>Please enter a name. Max 5 characters</div>
-<input type = "text" name = "name" placeholder="Player Name">
+<input type = "text" id = "textinput" name = "name" placeholder="Player Name">
 <input type = "hidden" name = "inputscore" id = "inputscore" value = "">
 <input type = "hidden" name = "gamemode" id = "gamemode" value = "">
-<button type = "submit">Submit</button>
+<button type = "submit" id = "submitscore">Submit</button>
 </form>
 <div id = "message"></div><br>
 <button type = "button" id = "homebutton">Click to Play Again!</button><br>
