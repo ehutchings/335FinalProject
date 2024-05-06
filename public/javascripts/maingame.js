@@ -30,6 +30,9 @@ let gameArray = [
 
 function startGame(lives) {
     console.log(gamemode);
+    if(lives == 0){
+        gameover(timerElement, gameinfoElement);
+        }
     hide(document.getElementById("startbutton"));
     hide(document.getElementById("start3button"));
     hide(document.getElementById("homebutton"));
