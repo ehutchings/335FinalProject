@@ -30,9 +30,11 @@ let gameArray = [
 
 function startGame(lives) {
     console.log(gamemode);
-    hide(document.getElementById("startbutton"))
-    hide(document.getElementById("start3button"))
-    hide(document.getElementById("homebutton"))
+    hide(document.getElementById("startbutton"));
+    hide(document.getElementById("start3button"));
+    hide(document.getElementById("homebutton"));
+    hide(document.getElementById("failbutton"));
+    hide(document.getElementById("info"));
     document.getElementById("score").innerHTML = "Score: " + score; // Displays Score at 0 for start
     document.getElementById("lives").innerHTML = "Lives: " + lives; // Displays Score at 0 for start
     clearInterval(intervalId); // Clear any existing timer
@@ -900,21 +902,21 @@ if(scoreLevel == 1){
 
 if(scoreLevel == 2){
     timer = 8;
-    nrange = "1-50"
-    nguess = 50;
+    nrange = "1-10"
+    nguess = 10;
 }
 
 if(scoreLevel == 3){
     timer = 8;
-    nrange = "1-100"
-    nguess = 100;
+    nrange = "1-25"
+    nguess = 25;
 }
 
 
 if(scoreLevel == 4){
     timer = 5;
-    nrange = "1-40"
-    nguess = 40;
+    nrange = "1-20"
+    nguess = 20;
 }
 
     var textInputElement = document.getElementById("textInput");

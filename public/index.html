@@ -9,9 +9,10 @@
   <timer id = "timer">Get Ready...</timer><br>
   <gameinfo id = "gameinfo">Short desc here</gameinfo><br>
   <div class="button-container">
-  <button type = "button" id = "startbutton">1 LIFE MODE</button><br>
+  <br><button type = "button" id = "startbutton">1 LIFE MODE</button><br>
   <button type = "button" id = "start3button">3 LIVES MODE</button><br>
-  <button type = "button" id = "homebutton" style="display: none;">HOME</button>
+  <button type = "button" id = "homebutton" style="display: none;">HOME</button><br>
+  <button type = "button" id = "failbutton"><a href = "">CLICK HERE TO SUBMIT SCORE</a></button><br>
   </div>
   <scorecontainer id = "scorecontainer"></scorecontainer>
   <clickables-container id = "clickables-container"></clickables-container>
@@ -29,7 +30,13 @@
 
 <h1><score id = "score" class="scorecss"></score></h1>
 <h1><score id = "lives" class="livecss"></score></h1>
-<button type = "submit" id = "failbutton"><a href = "">CLICK HERE TO SUBMIT SCORE</a></button><br>
+<info id = "info">
+  <h1>Welcome to our game!</h1>
+  <p>Please select a gamemode to begin playing.</p>
+  <p>Once your game is over, you may submit your score to the leaderboard.</p>
+  <p>Only the highest scores will show up, so do your best!</p>
+</info>
+
 
 </body>
 <script>

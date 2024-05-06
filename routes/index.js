@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 const Client = require('pg').Client;
+const resetHour = 8;
+
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL
@@ -9,6 +11,35 @@ const client = new Client({
 
 
 client.connect();
+
+setInterval(() => {
+var date = new Date();
+var hour = date.getHours();
+console.log("Server hour:" + hour);
+if (hour == resetHour)
+  {
+    client.query('DELETE FROM score', function(err, result) {
+      if (err) {
+        console.log("Unable to query DELETE");
+        next(err);
+      }
+      else {
+        console.log("1 Life scoreboard reset successfully.");
+      }
+    });
+
+    client.query('DELETE FROM score3lives', function(err, result) {
+      if (err) {
+        console.log("Unable to query DELETE");
+        next(err);
+      }
+      else {
+        console.log("3 Lives scoreboard reset successfully.");
+      }
+    })
+  }
+}, 3600000);
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -75,6 +106,7 @@ router.post('/submitScore',function(req, res, next) {
     }
   });
 
+
  function validateInputs(name, score, gamemode, res)
  {
   if (name.length > 5)
@@ -100,7 +132,7 @@ router.get(`/loadScoreboard/:gamemode`, function(req, res, next) {
   console.log(gamemode);
   if (gamemode == "1life")
   {
-  client.query("SELECT * FROM score ORDER BY score DESC FETCH FIRST 50 ROWS ONLY", function(err,result){
+  client.query("SELECT * FROM score ORDER BY score DESC FETCH FIRST 25 ROWS ONLY", function(err,result){
     if(err) {
       console.log("SQL ERROR");
       next(err);
@@ -116,7 +148,7 @@ router.get(`/loadScoreboard/:gamemode`, function(req, res, next) {
 }
 else if (gamemode == "3lives")
 {
-  client.query("SELECT * FROM score3lives ORDER BY score DESC FETCH FIRST 50 ROWS ONLY", function(err,result){
+  client.query("SELECT * FROM score3lives ORDER BY score DESC FETCH FIRST 25 ROWS ONLY", function(err,result){
     if(err) {
       console.log("SQL ERROR");
       next(err);
