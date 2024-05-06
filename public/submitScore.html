@@ -18,7 +18,12 @@
 <div id = "message"></div><br>
 <button type = "button" id = "homebutton">Click to Play Again!</button><br>
 
+
 <scoreboard id = "scoreboard" class = "scoreboard">
+  <scoreboard-label>
+    <h1 id = "board-name"></h1>
+    <p id = "reset-notice">*Leaderboards reset daily at 8 AM EST*</p>
+  </scoreboard-label>
 <tableName>NAME</tableName><tableScore>SCORE</tableScore>
 <br>
 </scoreboard>
@@ -37,6 +42,14 @@
   const gamemode = urlParams.get("gamemode");
   if(gamemode) {
     document.getElementById("gamemode").value = gamemode;
+    if (gamemode == "1life")
+    {
+      document.getElementById("board-name").innerText = "1 Life Leaderboard"
+    }
+    else if (gamemode == "3lives")
+    {
+      document.getElementById("board-name").innerText = "3 Lives Leaderboard"
+    }
   }
 
   function insertScore(dataTable, data)
