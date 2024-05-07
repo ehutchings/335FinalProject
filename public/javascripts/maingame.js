@@ -29,7 +29,7 @@ let gameArray = [
 
 
 function startGame(lives) {
-    console.log(gamemode);
+    //console.log(gamemode);
     if(lives == 0){
         gameover(timerElement, gameinfoElement);
         }
@@ -45,6 +45,9 @@ function startGame(lives) {
     //of random games. Might be fixed by now? Either way, it needs to be dealt with at some point...
     var first = true; //needed for bug fixes!
     var cpsnumber = 0;
+    if(lives < 1){
+        gameover(timerElement, gameinfoElement);
+    }
     document.removeEventListener('click', cpsListener, false); // Remove listener when game ends
     var timerAppear = true; //is used to activate game functions when the timer starts and not during the waiting period between games
     if(score == 12) {
@@ -314,14 +317,14 @@ if(tStart === true) {
                         clickable.addEventListener('click', () => {
                             clickable.style.display = "none";
                             clicked += 1;
-                            console.log("Clicked!");
+                            //console.log("Clicked!");
                         }, {once: true});
                         clickablesContainer.appendChild(clickable);}
                     timerAppear = false;
                 }
                 timerElement.textContent = timer;
                 timer = timer - 1;
-                console.log("Tick");
+                //console.log("Tick");
                 //SKIPS 0 FOR SOME REASON SO -1 IS ACCURATE, DON'T CHANGE IT TO 0
                 if(timer === -1 && clicked != maxClicked)
                 {
@@ -398,7 +401,7 @@ function cpsGame(timerElement, gameinfoElement, timer, first, timerAppear, score
             if (cpsStart === true && timerElement.textContent != "FAIL"){ 
                 cpsNumber++;
                 clickRefresh();
-                    console.log('mouseClick = ' + cpsNumber);
+                    //console.log('mouseClick = ' + cpsNumber);
                     if (cpsNumber >= goalN) {
                         timerElement.textContent = "You did it!";
                         clearInterval(myInt); //stops timer
@@ -426,7 +429,7 @@ function cpsGame(timerElement, gameinfoElement, timer, first, timerAppear, score
                 display(clickDisplayElement)
                 cpsNumber = 0;
                 clickRefresh();
-                console.log("Goal and cps" + goalN + " " + cpsNumber)
+                //console.log("Goal and cps" + goalN + " " + cpsNumber)
             }
             timerElement.textContent = timer;
             timer = timer - 1;
@@ -554,28 +557,28 @@ if(scoreLevel === 4){
                         if (left <= 0) return (sprite.style.left = 0);
                         sprite.style.left = left - speed + 'px';
                         addTrailDot(left, bottom);
-                        console.log("Left, Bottom: " + left + " " +  bottom);
+                        //console.log("Left, Bottom: " + left + " " +  bottom);
                         checkAndAppend(comboArray, left, bottom);
                         break;
                     case 'd':
                         if (left >= 50) return (sprite.style.left = 50);
                         sprite.style.left = left + speed + 'px';
                         addTrailDot(left, bottom);
-                        console.log("Left, Bottom: " + left + " " +  bottom);
+                        //console.log("Left, Bottom: " + left + " " +  bottom);
                         checkAndAppend(comboArray, left, bottom);
                         break;
                     case 'w':
                         if (bottom >= 0) return (sprite.style.bottom = 0);
                         sprite.style.bottom = bottom + speed + 'px';
                         addTrailDot(left, bottom);
-                        console.log("Left, Bottom: " + left + " " +  bottom);
+                        //console.log("Left, Bottom: " + left + " " +  bottom);
                         checkAndAppend(comboArray, left, bottom);
                         break;
                     case 's':
                         if (bottom <= -50) return (sprite.style.bottom = -50);
                         sprite.style.bottom = bottom - speed + 'px';
                         addTrailDot(left, bottom);
-                        console.log("Left, Bottom: " + left + " " +  bottom);
+                        //console.log("Left, Bottom: " + left + " " +  bottom);
                         checkAndAppend(comboArray, left, bottom);
                         break;
                 }
@@ -591,7 +594,7 @@ if(scoreLevel === 4){
         if (!exists) {
             array.push([num1, num2]);
             combo = combo + 1;
-            console.log(combo)
+            //console.log(combo)
             if(combo === spaces)
             {
                 timerElement.textContent = "You did it!";
@@ -642,9 +645,9 @@ wrongCount = 15
     sources = ["../images/dog.png", "../images/cat.png", "../images/chicken.png", "../images/cow.png", "../images/pig.png"];
     targetIndex = Math.floor(Math.random() * sources.length);
     targetImage = sources[targetIndex];
-    console.log(targetImage);
+    //console.log(targetImage);
     sources.splice(targetIndex, 1);
-    console.log(sources);
+    //console.log(sources);
     imageType = targetImage.split("/");
     imageType = imageType[2].split(".");
     imageType = imageType[0];
@@ -694,7 +697,7 @@ wrongCount = 15
             }
             timerElement.textContent = timer;
             timer = timer - 1;
-            console.log("Tick");
+            //console.log("Tick");
             //SKIPS 0 FOR SOME REASON SO -1 IS ACCURATE, DON'T CHANGE IT TO 0
 
 
@@ -817,8 +820,8 @@ timer = 2;
                         clickable.style.display = "none";
                         let computedStyle = window.getComputedStyle(clickable);
                         let colorOfBox = computedStyle.getPropertyValue("background-color");
-                        console.log(colorOfBox);
-                        console.log(matchColor);
+                        //console.log(colorOfBox);
+                        //console.log(matchColor);
                         if(matchColor == colorOfBox)
                         {
                             timerElement.textContent = "You did it!";
@@ -852,7 +855,7 @@ timer = 2;
                                 }
                         }
                         clicked += 1;
-                        console.log("Clicked!");
+                        //console.log("Clicked!");
                     }, {once: true});
                     clickablesContainer.appendChild(clickable);}
                 timerAppear = false;
@@ -869,7 +872,7 @@ timer = 2;
             }
             timerElement.textContent = timer;
             timer = timer - 1;
-            console.log("Tick");
+            //console.log("Tick");
             //SKIPS 0 FOR SOME REASON SO -1 IS ACCURATE, DON'T CHANGE IT TO 0
             if(timer === -1)
             {
@@ -970,7 +973,7 @@ if(scoreLevel == 4){
             display(textInputElement) //displays text box
             display(clickDisplayElement)
             timerAppear = false;
-            console.log(numbIndex.toString())
+            //console.log(numbIndex.toString())
         }
         timerElement.textContent = timer;
         timer = timer - 1;
