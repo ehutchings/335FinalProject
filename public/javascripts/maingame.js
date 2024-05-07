@@ -477,7 +477,7 @@ if(scoreLevel === 3){
 }
 
 if(scoreLevel === 4){
-    spaces = 31 //actually 33
+    spaces = 30 //actually 32
     timer = 4;
 }
 
