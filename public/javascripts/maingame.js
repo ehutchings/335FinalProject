@@ -15,19 +15,15 @@ var gamemode = ''
 
 //is the array for the randomization. if you want to add a game to the randomization cycle, add it to the array like so
 //ALSO DO NOT ADD UNIQUE PASSED PARAMETERS TO A FUNCTION!!!!!!! DEFINE THEM WITHIN THAT FUNCTION OR THIS WON'T WORK!!!!
-// let gameArray = [
-//     { func: textboxGame, params: [] },
-//     { func: mouseMoveGame, params: [] },
-//     { func: clickableGame, params: []},
-//     { func: cpsGame, params: []},
-//     { func: wasdGame, params: []},
-//     { func: clickImageGame, params: [] },
-//     {func: colorGame, params: []},
-//     {func: guessGame, params: []}
-// ];
 let gameArray = [
+    { func: textboxGame, params: [] },
+    { func: mouseMoveGame, params: [] },
     { func: clickableGame, params: []},
-    {func: colorGame, params: []}
+    { func: cpsGame, params: []},
+    { func: wasdGame, params: []},
+    { func: clickImageGame, params: [] },
+    {func: colorGame, params: []},
+    {func: guessGame, params: []}
 ];
 
 
