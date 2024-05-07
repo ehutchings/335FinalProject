@@ -15,15 +15,19 @@ var gamemode = ''
 
 //is the array for the randomization. if you want to add a game to the randomization cycle, add it to the array like so
 //ALSO DO NOT ADD UNIQUE PASSED PARAMETERS TO A FUNCTION!!!!!!! DEFINE THEM WITHIN THAT FUNCTION OR THIS WON'T WORK!!!!
+// let gameArray = [
+//     { func: textboxGame, params: [] },
+//     { func: mouseMoveGame, params: [] },
+//     { func: clickableGame, params: []},
+//     { func: cpsGame, params: []},
+//     { func: wasdGame, params: []},
+//     { func: clickImageGame, params: [] },
+//     {func: colorGame, params: []},
+//     {func: guessGame, params: []}
+// ];
 let gameArray = [
-    { func: textboxGame, params: [] },
-    { func: mouseMoveGame, params: [] },
     { func: clickableGame, params: []},
-    { func: cpsGame, params: []},
-    { func: wasdGame, params: []},
-    { func: clickImageGame, params: [] },
-    {func: colorGame, params: []},
-    {func: guessGame, params: []}
+    {func: colorGame, params: []}
 ];
 
 
@@ -64,6 +68,7 @@ function startGame(lives) {
     document.getElementById("startbutton").style.display = "none";
     var timerElement = document.getElementById("timer");
     var gameinfoElement = document.getElementById("gameinfo");
+    gameinfoElement.style.color = "black";
         let gameArrayIndex = Math.floor(Math.random() * gameArray.length); //randomizes games
         let chosenGame = gameArray[gameArrayIndex]; //chooses random game
         chosenGame.params = [timerElement, gameinfoElement, timer, first, timerAppear, scoreLevel, lives]; //sets the parameters
@@ -796,8 +801,6 @@ timer = 2;
         matchColor = "rgb(255, 165, 0)";
     }
 
-    clicked = 0;
-    maxClicked = 6;
     let clickablesContainer = document.getElementById("clickables-container");
     clickablesContainer.style.display = "block";
     const clickableWidth = 50;
@@ -854,7 +857,6 @@ timer = 2;
                                     startGame(lives)
                                 }
                         }
-                        clicked += 1;
                         //console.log("Clicked!");
                     }, {once: true});
                     clickablesContainer.appendChild(clickable);}
