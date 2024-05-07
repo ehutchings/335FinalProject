@@ -10,6 +10,7 @@ button {
   transition-duration: 0.3s;
   font-size: 20px;
   background-color: rgb(240, 255, 174);
+  border-style: none;
 }
 
 button:hover {
