@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src = "javascripts/maingame.js"></script>
+<style>
+  @media screen and (min-width: 900px) and (min-height: 600px)
+  {
+    resize-warning {
+      display: none;
+    }
+    game-elements {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 901px)
+  {
+    resize-warning {
+      display: absolute;
+      font-size: 7vw;
+      z-index: 1;
+      color: red;
+      width: 100vw;
+      height: 100vh;
+    }
+    game-elements {
+      display: none;
+    }
+  }
+
+  @media screen and (max-height: 700px)
+  {
+    resize-warning {
+      display: absolute;
+      font-size: 7vw;
+      z-index: 1;
+      color: red;
+      width: 100vw;
+      height: 100vh;
+    }
+    game-elements {
+      display: none;
+    }
+  }
+
+</style>
+</head>
+
+<body>
+  <resize-warning>PLEASE RESIZE WINDOW!</resize-warning>
+  <game-elements>
+  <timer id = "timer">Get Ready...</timer><br>
+  <gameinfo id = "gameinfo">Short desc here</gameinfo><br>
+  <div class="button-container">
+  <br><button type = "button" id = "startbutton">1 LIFE MODE</button><br>
+  <button type = "button" id = "start3button">3 LIVES MODE</button><br>
+  <button type = "button" id = "homebutton" style="display: none;">HOME</button><br>
+  <button type = "button" id = "failbutton"><a href = "">CLICK HERE TO SUBMIT SCORE</a></button><br>
+  </div>
+  <scorecontainer id = "scorecontainer"></scorecontainer>
+  <clickables-container id = "clickables-container"></clickables-container>
+  
+  
+  <p class="textgame"><input type="text" style="display:none" id="textInput" placeholder="Type here..."></p>
+  <p class="cpsgame" style="display: none;" id="clickDisplay"></p>
+<div id="game1message"></div>
+
+
+<div id="box" style="border: 2px solid black; width: 75px; height: 75px; margin-left: auto; margin-right: auto; display: none;">
+  <div id="sprite" style="left: 0; bottom: 0; display: none;"></div>
+</div>
+
+
+<h1><score id = "score" class="scorecss"></score></h1>
+<h1><score id = "lives" class="livecss"></score></h1>
+<info id = "info">
+  <h1 class="intro-font">Welcome to our game!</h1>
+  <p class="intro-font2">Please select a gamemode to begin playing.</p>
+  <p class="intro-font2">The further you make it, the harder the game gets.</p>
+  <p class="intro-font2">Once your game is over, you may submit your score to the leaderboard.</p>
+  <p class="intro-font2">Only the highest scores will be at the top, so do your best!</p>
+</info>
+</game-elements>
+
+
+
+
+</body>
+<script>
+  document.getElementById("startbutton").addEventListener("click", function() {
+    startGame(1); // Start game with 0 lives
+    score = 0;
+    gamemode = "1life";
+    console.log("1 Life Game Started.");
+});
+
+document.getElementById("start3button").addEventListener("click", function() {
+    startGame(3); // Start game with 3 lives
+    score = 0;
+    gamemode = '3lives';
+    console.log("3 Lives Game Started.");
+});
+
+document.getElementById("homebutton").addEventListener("click", function() {
+  window.location.href = "/"; // Redirect to the index.html page
+});
+</script>
+</html>
