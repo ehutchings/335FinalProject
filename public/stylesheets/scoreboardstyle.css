@@ -32,7 +32,7 @@ tableScore {
     font-size: 20px;
     display: inline-block;
     width: 125px;
-    height: 30px;
+    height: 35px;
     border-style: solid;
     border-color: black;
     background-color: yellow;
@@ -44,7 +44,7 @@ tableName {
     font-size: 20px;
     display: inline-block;
     width: 125px;
-    height: 30px;
+    height: 35px;
     border-style: solid;
     border-color:black;
     background-color: yellow;
